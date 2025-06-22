@@ -7,7 +7,8 @@ import AnimatedNavButton from '~/components/buttons/AnimatedNavButton';
 import ScreenLayout from '~/components/layouts/ScreenLayout';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
-import { AuthStackParamList } from './navigators/AuthNavigator';
+import { AuthStackParamList } from '../../screens/navigators/AuthNavigator';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type NavProp = NativeStackNavigationProp<AuthStackParamList, 'Signup'>;
 
@@ -15,16 +16,16 @@ type Feature = { title: string; desc: string; gif: any };
 const CARD_HEIGHT = 140;
 
 const features: Feature[] = [
-  { title: 'Todo List', desc: 'Set daily tasks', gif: require('../assets/gifs/checklist.gif') },
+  { title: 'Todo List', desc: 'Set daily tasks', gif: require('../../assets/gifs/checklist.gif') },
   {
     title: 'Habit Tracking',
     desc: 'Track streaks daily',
-    gif: require('../assets/gifs/running.gif'),
+    gif: require('../../assets/gifs/running.gif'),
   },
-  { title: 'Goal Setting', desc: 'Bite-size milestones', gif: require('../assets/gifs/goals.gif') },
-  { title: 'Analytics', desc: 'Progress charts', gif: require('../assets/gifs/analytics.gif') },
-  { title: 'Community', desc: 'Join challenges', gif: require('../assets/gifs/discussion.gif') },
-  { title: 'Reminders', desc: 'Timely nudges', gif: require('../assets/gifs/alarm.gif') },
+  { title: 'Goal Setting', desc: 'Bite-size milestones', gif: require('../../assets/gifs/goals.gif') },
+  { title: 'Analytics', desc: 'Progress charts', gif: require('../../assets/gifs/analytics.gif') },
+  { title: 'Community', desc: 'Join challenges', gif: require('../../assets/gifs/discussion.gif') },
+  { title: 'Reminders', desc: 'Timely nudges', gif: require('../../assets/gifs/alarm.gif') },
 ];
 
 const FeatureCard = React.memo(({ item }: { item: Feature }) => (
@@ -43,10 +44,14 @@ export default function Onboarding4() {
   const nav = useNavigation<NavProp>();
   const listRef = useRef<FlatList<Feature>>(null);
 
-  const handleFinish = () => {
-    nav.getParent()?.navigate('Auth', { screen: 'Signup' });
+  const handleFinish = async () => {
+    await AsyncStorage.setItem('onBoardingDone', 'true');
+    // wipe the stack and go into Auth flow
+    nav.reset({
+      index: 0,
+      routes: [{ name: 'Signup' }], // or 'Signup', whichever screen you want first
+    });
   };
-
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<Feature>) => <FeatureCard item={item} />,
     []

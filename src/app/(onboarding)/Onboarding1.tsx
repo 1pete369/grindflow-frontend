@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Image, Text, View } from 'react-native';
 import Animated, { SlideInRight, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import ScreenLayout from '~/components/layouts/ScreenLayout';
-import { OnboardingStackParamList } from './navigators/OnboardingNavigator';
+import { OnboardingStackParamList } from '../../screens/navigators/OnboardingNavigator';
 import AnimatedNavButton from '~/components/buttons/AnimatedNavButton';
 import CircularImageSpinner from '~/components/ui/AnimateImages';
 import { LinearGradient } from 'expo-linear-gradient';

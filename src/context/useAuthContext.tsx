@@ -65,7 +65,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   }): Promise<boolean> => {
     setIsSigningUp(true)
     try {
+      console.log("came to signup")
       const res = await axiosInstance.post("/auth/signup", data)
+      console.log("res.data",res.data)
       setUser(res.data)
       await AsyncStorage.setItem("token", res.data.token)
       Toast.show({ type: "success", text1: "Signup successful!" })

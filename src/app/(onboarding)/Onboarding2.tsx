@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { OnboardingStackParamList } from './navigators/OnboardingNavigator';
+import { OnboardingStackParamList } from '../../screens/navigators/OnboardingNavigator';
 import ScreenLayout from '~/components/layouts/ScreenLayout';
 import AnimatedButton from '~/components/buttons/AnimatedButton';
 import AnimatedNavButton from '~/components/buttons/AnimatedNavButton';

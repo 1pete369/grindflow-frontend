@@ -53,16 +53,17 @@ export default function LoginScreen() {
             placeholder="Email"
             keyboardType="email-address"
             autoCapitalize="none"
-            className="mb-4 rounded border border-gray-300 px-4 py-2"
+            className="mb-4 rounded border border-gray-300 px-4 py-4"
           />
 
           <TextInput
             placeholder="Password"
             secureTextEntry
-            className="mb-6 rounded border border-gray-300 px-4 py-2"
+            className="mb-6 rounded border border-gray-300 px-4 py-4"
           />
 
           <TouchableOpacity
+            activeOpacity={0.8} // ← less aggressive fade (1.0 = no fade, 0.85 = mild)
             className="mb-4 rounded bg-brand-500 py-3"
             onPress={() => {
               /* TODO: call your login API, then navigate to main app */
@@ -70,9 +71,12 @@ export default function LoginScreen() {
             <Text className="text-center text-lg font-semibold text-white">Log In</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => nav.goBack()}>
+          <TouchableOpacity
+            activeOpacity={0.8} // ← less aggressive fade (1.0 = no fade, 0.85 = mild)
+            onPress={() => nav.goBack()}>
             <Text className="text-center text-gray-600">
-              Don&apos;t have an account? <Text className="font-semibold text-brand-500">Sign Up</Text>
+              Don&apos;t have an account?{' '}
+              <Text className="font-semibold text-brand-500">Sign Up</Text>
             </Text>
           </TouchableOpacity>
         </Animated.View>
